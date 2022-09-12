@@ -50,6 +50,10 @@ func main() {
 				logger.Error("could not get current AQI", zap.Error(err))
 				continue
 			}
+			if aqi.PrimaryPollutant == "" {
+				logger.Error("primary pollutant is empty", zap.Any("aqi", aqi))
+				continue
+			}
 			influxClient.WriteAQIPoint(aqi)
 		}
 	}()
