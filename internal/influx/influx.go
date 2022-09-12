@@ -25,7 +25,7 @@ func (ic *InfluxConn) Close() {
 
 func (ic *InfluxConn) WriteAQIPoint(r *requests.AQIResponse) {
 	point := influxdb2.NewPointWithMeasurement("aqi").
-		AddTag("primary_pollutant", r.PrimaryPollutant).
+		AddField("primary_pollutant", r.PrimaryPollutant).
 		AddField("aqi", r.AQI).
 		AddField("level", r.Level).
 		SetTime(time.Now())
